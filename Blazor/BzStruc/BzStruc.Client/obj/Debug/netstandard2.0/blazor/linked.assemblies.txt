@@ -1,0 +1,15 @@
+C:\git\Bz\BlazorStruc\Blazor\BzStruc\BzStruc.Client\obj\Debug\netstandard2.0\blazor\linker\BzStruc.Client.dll
+C:\git\Bz\BlazorStruc\Blazor\BzStruc\BzStruc.Client\obj\Debug\netstandard2.0\blazor\linker\BzStruc.Shared.dll
+C:\git\Bz\BlazorStruc\Blazor\BzStruc\BzStruc.Client\obj\Debug\netstandard2.0\blazor\linker\Microsoft.AspNetCore.Blazor.Browser.dll
+C:\git\Bz\BlazorStruc\Blazor\BzStruc\BzStruc.Client\obj\Debug\netstandard2.0\blazor\linker\Microsoft.AspNetCore.Blazor.dll
+C:\git\Bz\BlazorStruc\Blazor\BzStruc\BzStruc.Client\obj\Debug\netstandard2.0\blazor\linker\Microsoft.AspNetCore.Blazor.TagHelperWorkaround.dll
+C:\git\Bz\BlazorStruc\Blazor\BzStruc\BzStruc.Client\obj\Debug\netstandard2.0\blazor\linker\Microsoft.Extensions.DependencyInjection.Abstractions.dll
+C:\git\Bz\BlazorStruc\Blazor\BzStruc\BzStruc.Client\obj\Debug\netstandard2.0\blazor\linker\Microsoft.Extensions.DependencyInjection.dll
+C:\git\Bz\BlazorStruc\Blazor\BzStruc\BzStruc.Client\obj\Debug\netstandard2.0\blazor\linker\Microsoft.JSInterop.dll
+C:\git\Bz\BlazorStruc\Blazor\BzStruc\BzStruc.Client\obj\Debug\netstandard2.0\blazor\linker\Mono.WebAssembly.Interop.dll
+C:\git\Bz\BlazorStruc\Blazor\BzStruc\BzStruc.Client\obj\Debug\netstandard2.0\blazor\linker\mscorlib.dll
+C:\git\Bz\BlazorStruc\Blazor\BzStruc\BzStruc.Client\obj\Debug\netstandard2.0\blazor\linker\System.Core.dll
+C:\git\Bz\BlazorStruc\Blazor\BzStruc\BzStruc.Client\obj\Debug\netstandard2.0\blazor\linker\System.dll
+C:\git\Bz\BlazorStruc\Blazor\BzStruc\BzStruc.Client\obj\Debug\netstandard2.0\blazor\linker\System.Net.Http.dll
+C:\git\Bz\BlazorStruc\Blazor\BzStruc\BzStruc.Client\obj\Debug\netstandard2.0\blazor\linker\BzStruc.Client.pdb
+C:\git\Bz\BlazorStruc\Blazor\BzStruc\BzStruc.Client\obj\Debug\netstandard2.0\blazor\linker\BzStruc.Shared.pdb
