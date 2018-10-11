@@ -13,6 +13,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\BzStruc.Client\BzStruc.Client.csproj" />
+    <ProjectReference Include="..\BzStruc.Facade\BzStruc.Facade.csproj" />
     <ProjectReference Include="..\BzStruc.Shared\BzStruc.Shared.csproj" />
   </ItemGroup>
 

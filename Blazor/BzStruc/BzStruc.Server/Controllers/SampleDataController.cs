@@ -1,4 +1,5 @@
-﻿using BzStruc.Shared;
+﻿using BzStruc.Facade.Implement;
+using BzStruc.Shared;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
@@ -10,6 +11,12 @@ namespace BzStruc.Server.Controllers
     [Route("api/[controller]")]
     public class SampleDataController : Controller
     {
+        private readonly IInterlocutorFacade _interlocutorFacade;
+        public SampleDataController(IInterlocutorFacade interlocutorFacade)
+        {
+            _interlocutorFacade = interlocutorFacade;
+        }
+
         private static string[] Summaries = new[]
         {
             "Freezing a", "Bracing a", "Chilly b", "Cool b", "Mild", "Warm", "Balmy", "Hot", "Sweltering", "Scorching"
@@ -23,7 +30,7 @@ namespace BzStruc.Server.Controllers
             {
                 Date = DateTime.Now.AddDays(index),
                 TemperatureC = rng.Next(-20, 55),
-                Summary = Summaries[rng.Next(Summaries.Length)]
+                Summary = _interlocutorFacade.AddA( Summaries[rng.Next(Summaries.Length)])
             });
         }
     }

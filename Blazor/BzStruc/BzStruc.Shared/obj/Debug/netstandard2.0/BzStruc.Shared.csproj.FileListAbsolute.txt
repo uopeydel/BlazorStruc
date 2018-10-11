@@ -1,9 +1,0 @@
-C:\git\Bz\BlazorStruc\Blazor\BzStruc\BzStruc.Shared\bin\Debug\netstandard2.0\BzStruc.Shared.deps.json
-C:\git\Bz\BlazorStruc\Blazor\BzStruc\BzStruc.Shared\bin\Debug\netstandard2.0\BzStruc.Shared.dll
-C:\git\Bz\BlazorStruc\Blazor\BzStruc\BzStruc.Shared\bin\Debug\netstandard2.0\BzStruc.Shared.pdb
-C:\git\Bz\BlazorStruc\Blazor\BzStruc\BzStruc.Shared\obj\Debug\netstandard2.0\BzStruc.Shared.csprojAssemblyReference.cache
-C:\git\Bz\BlazorStruc\Blazor\BzStruc\BzStruc.Shared\obj\Debug\netstandard2.0\BzStruc.Shared.csproj.CoreCompileInputs.cache
-C:\git\Bz\BlazorStruc\Blazor\BzStruc\BzStruc.Shared\obj\Debug\netstandard2.0\BzStruc.Shared.AssemblyInfoInputs.cache
-C:\git\Bz\BlazorStruc\Blazor\BzStruc\BzStruc.Shared\obj\Debug\netstandard2.0\BzStruc.Shared.AssemblyInfo.cs
-C:\git\Bz\BlazorStruc\Blazor\BzStruc\BzStruc.Shared\obj\Debug\netstandard2.0\BzStruc.Shared.dll
-C:\git\Bz\BlazorStruc\Blazor\BzStruc\BzStruc.Shared\obj\Debug\netstandard2.0\BzStruc.Shared.pdb

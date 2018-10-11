@@ -1,8 +1,0 @@
-C:\Users\Admin\.nuget\packages\microsoft.aspnetcore.blazor\0.6.0\lib\netstandard2.0\Microsoft.AspNetCore.Blazor.dll
-C:\Users\Admin\.nuget\packages\microsoft.aspnetcore.blazor.browser\0.6.0\lib\netstandard2.0\Microsoft.AspNetCore.Blazor.Browser.dll
-C:\Users\Admin\.nuget\packages\microsoft.aspnetcore.blazor.build\0.6.0\lib\netstandard1.0\Microsoft.AspNetCore.Blazor.TagHelperWorkaround.dll
-C:\Users\Admin\.nuget\packages\microsoft.extensions.dependencyinjection\2.1.0\lib\netstandard2.0\Microsoft.Extensions.DependencyInjection.dll
-C:\Users\Admin\.nuget\packages\microsoft.extensions.dependencyinjection.abstractions\2.1.0\lib\netstandard2.0\Microsoft.Extensions.DependencyInjection.Abstractions.dll
-C:\Users\Admin\.nuget\packages\microsoft.jsinterop\0.6.0\lib\netstandard2.0\Microsoft.JSInterop.dll
-C:\Users\Admin\.nuget\packages\mono.webassembly.interop\0.6.0\lib\netstandard2.0\Mono.WebAssembly.Interop.dll
-C:\git\Bz\BlazorStruc\Blazor\BzStruc\BzStruc.Shared\bin\Debug\netstandard2.0\BzStruc.Shared.dll
