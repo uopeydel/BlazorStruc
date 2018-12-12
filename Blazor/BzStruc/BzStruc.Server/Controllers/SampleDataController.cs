@@ -1,5 +1,6 @@
 ﻿using BzStruc.Facade.Implement;
 using BzStruc.Shared;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
@@ -22,6 +23,7 @@ namespace BzStruc.Server.Controllers
             "Freezing a", "Bracing a", "Chilly b", "Cool b", "Mild", "Warm", "Balmy", "Hot", "Sweltering", "Scorching"
         };
 
+        [AllowAnonymous]
         [HttpGet("[action]")]
         public IEnumerable<WeatherForecast> WeatherForecasts()
         {
@@ -30,8 +32,24 @@ namespace BzStruc.Server.Controllers
             {
                 Date = DateTime.Now.AddDays(index),
                 TemperatureC = rng.Next(-20, 55),
-                Summary = _interlocutorFacade.AddA( Summaries[rng.Next(Summaries.Length)])
+                Summary = _interlocutorFacade.AddA(Summaries[rng.Next(Summaries.Length)]).Result
             });
+        }
+
+        [AllowAnonymous]
+        [HttpGet("test")]
+        public async Task<IActionResult> Test()
+        {
+            return Ok(await _interlocutorFacade.AddA("ss"));
+
+        }
+
+        [AllowAnonymous]
+        [HttpGet("testtask")]
+        public async Task<IActionResult> testtask([FromQuery]int time, [FromQuery]int value)
+        {
+            await _interlocutorFacade.AddCTask(time, value);
+            return Ok();
         }
     }
 }

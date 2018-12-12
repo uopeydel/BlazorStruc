@@ -5,11 +5,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="Interface\" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <ProjectReference Include="..\BzStruc.Repository\BzStruc.Repository.csproj" />
+    <ProjectReference Include="..\BzStruc.Shared\BzStruc.Shared.csproj" />
   </ItemGroup>
 
 </Project>
