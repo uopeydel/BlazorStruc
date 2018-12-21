@@ -15,7 +15,7 @@ namespace XUnitTestProject1
         {
             msSql1DbContext = new Mock<MsSql1DbContext>();
             //msSql1DbContext.Object.Set<Logs>().Add();
-            var InterlocutorFacadeTest = new InterlocutorFacade(msSql1DbContext.Object);
+            //var InterlocutorFacadeTest = new InterlocutorFacade(msSql1DbContext.Object);
              
             Assert.Equal(1, 1);
         }

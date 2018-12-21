@@ -10,11 +10,11 @@ using System.Threading.Tasks;
 namespace BzStruc.Repository.DAL
 {
 
-    public abstract class GenericEFRepository<CustomDbContext>
+    public class GenericEFRepository<CustomDbContext> : IGenericEFRepository<CustomDbContext>
         where CustomDbContext : IdentityDbContext<GenericUser, GenericRole, int, GenericUserClaim, GenericUserRole, GenericUserLogin, GenericRoleClaim, GenericUserToken>
     {
         private readonly CustomDbContext _msGenericDb;
-        public CustomDbContext context() { return _msGenericDb; }
+        public CustomDbContext Context() { return _msGenericDb; }
         public GenericEFRepository(CustomDbContext msGenericDb)
         {
             _msGenericDb = msGenericDb;
@@ -32,7 +32,7 @@ namespace BzStruc.Repository.DAL
             return response;
         }
 
-        public async Task<CustomTable> FirstOrDefaultAsync<CustomTable>(Expression<Func<CustomTable, bool>> predicate, bool AsNoTracking = false) 
+        public async Task<CustomTable> FirstOrDefaultAsync<CustomTable>(Expression<Func<CustomTable, bool>> predicate, bool AsNoTracking = false)
             where CustomTable : class
         {
             var query = _msGenericDb.Set<CustomTable>().Where(predicate);
@@ -43,8 +43,7 @@ namespace BzStruc.Repository.DAL
             return await query.FirstOrDefaultAsync();
         }
 
-
-        public async Task<CustomTable> AddAsync<CustomTable>(CustomTable entity) 
+        public async Task<CustomTable> AddAsync<CustomTable>(CustomTable entity)
             where CustomTable : class
         {
             await _msGenericDb.Set<CustomTable>().AddAsync(entity);
@@ -65,7 +64,7 @@ namespace BzStruc.Repository.DAL
             _msGenericDb.Entry(entity).State = EntityState.Modified;
         }
 
-        public void UpdateSpecficProperty<CustomTable, TProperty>(CustomTable entity, params Expression<Func<CustomTable, TProperty>>[] properties) 
+        public void UpdateSpecficProperty<CustomTable, TProperty>(CustomTable entity, params Expression<Func<CustomTable, TProperty>>[] properties)
             where CustomTable : class
         {
             if (properties != null && properties.Length > 0)
@@ -97,15 +96,16 @@ namespace BzStruc.Repository.DAL
             }
             _msGenericDb.Entry(entity).State = EntityState.Modified;
 
-        } 
+        }
+
     }
 
-    public interface IGenericEFRepository
+    public interface IGenericEFRepository<CustomDbContext>
     {
         Task<Results<List<TbDest>>> GetPagingAsync<TbSource, TbDest>(
             Expression<Func<TbSource, bool>> predicate,
             Expression<Func<TbSource, TbDest>> selector,
-            PagingParameters paging) 
+            PagingParameters paging)
             where TbDest : class where TbSource : class;
 
         Task<CustomTable> FirstOrDefaultAsync<CustomTable>(

@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace BzStruc.Repository.Service.Implement
 {
-    public class ContactService : IContactService
+    public class ConversationService : IConversationService
     {
 
 

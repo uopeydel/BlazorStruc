@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace BzStruc.Repository.Service.Interface
 {
-    public interface IContactService
+    public interface IConversationService
     { 
     }
 }

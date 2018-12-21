@@ -1,4 +1,6 @@
 ﻿using BzStruc.Facade.Implement;
+using BzStruc.Facade.Interface;
+using BzStruc.Repository.DAL;
 using BzStruc.Shared;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -12,10 +14,10 @@ namespace BzStruc.Server.Controllers
     [Route("api/[controller]")]
     public class SampleDataController : Controller
     {
-        private readonly IInterlocutorFacade _interlocutorFacade;
-        public SampleDataController(IInterlocutorFacade interlocutorFacade)
+        private readonly IConversationFacade _conversationFacade;
+        public SampleDataController(IConversationFacade conversationFacade)
         {
-            _interlocutorFacade = interlocutorFacade;
+            _conversationFacade = conversationFacade;
         }
 
         private static string[] Summaries = new[]
@@ -32,24 +34,18 @@ namespace BzStruc.Server.Controllers
             {
                 Date = DateTime.Now.AddDays(index),
                 TemperatureC = rng.Next(-20, 55),
-                Summary = _interlocutorFacade.AddA(Summaries[rng.Next(Summaries.Length)]).Result
+                Summary = ""
             });
         }
 
         [AllowAnonymous]
         [HttpGet("test")]
-        public async Task<IActionResult> Test()
+        public async Task<IActionResult> Test([FromQuery]PagingParameters paging)
         {
-            return Ok(await _interlocutorFacade.AddA("ss"));
+            var result = await _conversationFacade.GetPaging(paging);
+            return Ok(result);
 
         }
-
-        [AllowAnonymous]
-        [HttpGet("testtask")]
-        public async Task<IActionResult> testtask([FromQuery]int time, [FromQuery]int value)
-        {
-            await _interlocutorFacade.AddCTask(time, value);
-            return Ok();
-        }
+         
     }
 }

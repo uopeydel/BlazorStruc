@@ -1,16 +1,21 @@
-﻿using System;
+﻿using BzStruc.Repository.Models;
+using System;
 using System.Collections.Generic;
-using System.Text;
 
 namespace BzStruc.Repository.Contract
-{ 
-    public partial class ContactContract
-    { 
-        public int ContactId { get; set; }
-        public int SenderStatus { get; set; }
-        public int ReceiverStatus { get; set; }
-        public DateTimeOffset ActionTime { get; set; } 
-        public int ContactReceiverId { get; set; }  
-        public int ContactSenderId { get; set; } 
+{
+    public class ConversationContract
+    {
+        public int Id { get; set; }
+        public string Name { get; set; }
+        public bool IsGroup { get; set; }
+
+        public DateTime CreatedAt { get; set; }
+        public DateTime UpdateAt { get; set; }
+
+        public Media Media { get; set; }
+        public List<Participants> Participants { get; set; }
+        public List<Messages> Messages { get; set; }
+
     }
 }

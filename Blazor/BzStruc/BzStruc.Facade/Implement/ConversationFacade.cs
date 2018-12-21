@@ -1,4 +1,5 @@
-﻿using BzStruc.Repository.Contract;
+﻿using BzStruc.Facade.Interface;
+using BzStruc.Repository.Contract;
 using BzStruc.Repository.DAL;
 using BzStruc.Repository.Models;
 using BzStruc.Repository.Service.Interface;
@@ -11,38 +12,32 @@ namespace BzStruc.Facade.Implement
 {
     public class ConversationFacade : IConversationFacade
     {
-        private readonly IGenericEFRepository _genericEFRepo;
-        private readonly IContactService _contactService;
+        private readonly IGenericEFRepository<MsSql1DbContext> _genericEFRepo;
+        private readonly IConversationService _conversationService;
         /// <summary>
         /// 
         /// </summary>
         /// <param name="_msGenericDb">Dont use this in this facade ,use for send to InterfaceOfService</param>
-        public ConversationFacade(IGenericEFRepository genericEFRepo, IContactService contactService)
+        public ConversationFacade(IGenericEFRepository<MsSql1DbContext> genericEFRepo, IConversationService contactService)
         {
             _genericEFRepo = genericEFRepo;
-            _contactService = contactService;
+            _conversationService = contactService;
         }
 
-        public async Task<Results<List<ContactContract>>> GetPaging(PagingParameters paging)
+        public async Task<Results<List<ConversationContract>>> GetPaging(PagingParameters paging)
         {
-            Expression<Func<Contact, bool>> predicate = p => true;
-            Expression<Func<Contact, ContactContract>> selector = s =>
-            new ContactContract
+            Expression<Func<Conversation, bool>> predicate = p => true;
+            Expression<Func<Conversation, ConversationContract>> selector = s =>
+            new ConversationContract
             {
-                ActionTime = s.ActionTime,
-                ContactId = s.ContactId,
-                ContactReceiverId = s.ContactReceiverId,
-                ContactSenderId = s.ContactSenderId,
-                ReceiverStatus = s.ReceiverStatus,
-                SenderStatus = s.SenderStatus
+                Id = s.Id,
+                Name = s.Name,
+                //Media = s.Media
             };
-            var response = await _genericEFRepo.GetPagingAsync<Contact, ContactContract>(predicate, selector, paging);
+            var response = await _genericEFRepo.GetPagingAsync<Conversation, ConversationContract>(predicate, selector, paging);
             return response;
-        } 
+        }
     }
 
-    public interface IConversationFacade
-    {
-        Task<Results<List<ContactContract>>> GetPaging(PagingParameters paging);
-    }
+
 }

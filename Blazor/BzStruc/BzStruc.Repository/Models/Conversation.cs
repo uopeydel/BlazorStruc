@@ -5,22 +5,35 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace BzStruc.Repository.Models
 {
-    public partial class Conversation
+    public class Conversation
     {
-        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+        public Conversation()
+        {
+            Participants = new HashSet<Participants>();
+            Messages = new HashSet<Messages>();
+           
+        }
+
         [Key]
-        public int ConversationId { get; set; }
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+        public int Id { get; set; }
+        public string Name { get; set; }
+        public bool IsGroup { get; set; }
 
-        public string Message { get; set; }
-        public DateTimeOffset SendTime { get; set; }
-        public int MessageDataType { get; set; }
+        [Column(TypeName = "datetime2")]
+        public DateTime CreatedAt { get; set; }
+        [Column(TypeName = "datetime2")]
+        public DateTime UpdateAt { get; set; }
 
+        public int MediaId { get; set; }
+        [ForeignKey("MediaId")]
+        public virtual Media Media { get; set; }
 
+        public virtual ICollection<Participants> Participants { get; set; }
 
-        public int ConversationReceiverId { get; set; }
-        public Interlocutor ConversationReceiver { get; set; }
-
-        public int ConversationSenderId { get; set; }
-        public Interlocutor ConversationSender { get; set; }
+        public virtual ICollection<Messages> Messages { get; set; }
+         
     }
+
+
 }

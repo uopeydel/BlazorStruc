@@ -1,29 +1,33 @@
-﻿using Microsoft.AspNetCore.Identity;
-using System;
+﻿using BzStruc.Repository.Enums;
+using Microsoft.AspNetCore.Identity;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using System.Text;
 
 namespace BzStruc.Repository.Models
 {
-    public enum UserOnlineStatus
-    {
-        Online = 1,
-        Offline = 2,
-        Hide = 3,
-        Busy = 4
-    }
+   
 
     public partial class GenericUser : IdentityUser<int>
     {
-        [Required] [StringLength(200)] public string FirstName { get; set; }
-        [Required] [StringLength(200)] public string LastName { get; set; }
+        public GenericUser()
+        {
+            Participants = new HashSet<Participants>();
+            Messages = new HashSet<Messages>();
+            MessageReadBy = new HashSet<MessageReadBy>();
+        }
+        [Required]
+        [StringLength(200)]
+        public string FirstName { get; set; }
+        [Required]
+        [StringLength(200)]
+        public string LastName { get; set; }
+
         public UserOnlineStatus OnlineStatus { get; set; }
 
-        public int InterlocutorId { get; set; }
-        [ForeignKey("InterlocutorId")]
-        public Interlocutor Interlocutor { get; set; }
+        public virtual ICollection<Participants> Participants { get; set; }
+        public virtual ICollection<Messages> Messages { get; set; }
+        public virtual ICollection<MessageReadBy> MessageReadBy { get; set; }
 
     }
 
