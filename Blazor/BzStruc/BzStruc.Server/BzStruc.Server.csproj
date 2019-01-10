@@ -7,15 +7,12 @@
 
   <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.App" />
-    <PackageReference Include="Microsoft.AspNetCore.Blazor.Server" Version="0.6.0" />
-    <PackageReference Include="Microsoft.AspNetCore.Razor.Design" Version="2.1.2" />
+    <PackageReference Include="Microsoft.AspNetCore.Blazor.Server" Version="0.7.0" />
   </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\BzStruc.Client\BzStruc.Client.csproj" />
     <ProjectReference Include="..\BzStruc.Facade\BzStruc.Facade.csproj" />
-    <ProjectReference Include="..\BzStruc.Repository\BzStruc.Repository.csproj" />
-    <ProjectReference Include="..\BzStruc.Shared\BzStruc.Shared.csproj" />
   </ItemGroup>
 
 </Project>

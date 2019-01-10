@@ -16,7 +16,10 @@ namespace BzStruc.Server.Controllers
                 {
                     return 0;
                 }
-                var userId = User.FindFirst(ClaimTypes.NameIdentifier).Value;
+                var x = User.Identity as ClaimsIdentity;
+                var email = x.Claims.Where(w => w.Type == ClaimTypes.Email).Select(s => s.Value).FirstOrDefault();
+                var userId = x.Claims.Where(w => w.Type == ClaimTypes.NameIdentifier).Select(s => s.Value).FirstOrDefault(); 
+                //var userId = User.FindFirst(ClaimTypes.NameIdentifier).Value;
                 return Convert.ToInt32(userId);
             }
         }

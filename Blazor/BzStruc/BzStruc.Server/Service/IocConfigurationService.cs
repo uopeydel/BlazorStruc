@@ -13,7 +13,7 @@ namespace BzStruc.Server.Service
         public static void AddIoc(this IServiceCollection services/*, IConfiguration configuration, IHostingEnvironment hostingEnvironment*/)
         {
             #region Transient
-
+            services.AddTransient<IJwtTokenService, JwtTokenService>();
             //services.AddTransient<IEmailSender, EmailSender>();
 
             #endregion
