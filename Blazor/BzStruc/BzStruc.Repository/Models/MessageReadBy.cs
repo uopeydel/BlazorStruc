@@ -11,17 +11,17 @@ namespace BzStruc.Repository.Models
         [Key]
         [Column(Order = 0)]
         [DatabaseGenerated(DatabaseGeneratedOption.None)]
-        public Guid messageId { get; set; }
+        public Guid MessageId { get; set; }
         [Key]
         [Column(Order = 1)]
         [DatabaseGenerated(DatabaseGeneratedOption.None)]
-        public int userId { get; set; }
+        public int UserId { get; set; }
 
 
 
-        [ForeignKey("messageId")]
+        [ForeignKey("MessageId")]
         public virtual Messages Messages { get; set; }
-        [ForeignKey("userId")]
+        [ForeignKey("UserId")]
         public virtual GenericUser User { get; set; }
 
         [Column(TypeName = "datetime2")]

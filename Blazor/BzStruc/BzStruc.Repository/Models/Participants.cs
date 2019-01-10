@@ -11,20 +11,20 @@ namespace BzStruc.Repository.Models
         [Key]
         [Column(Order = 0)]
         [DatabaseGenerated(DatabaseGeneratedOption.None)]
-        public Guid convertationId { get; set; }
+        public Guid ConvertationId { get; set; }
 
         [Key]
         [Column(Order = 1)]
         [DatabaseGenerated(DatabaseGeneratedOption.None)]
-        public int userId { get; set; }
+        public int UserId { get; set; }
  
         [Column(TypeName = "datetime2")]
         public DateTime CreatedAt { get; set; }
 
-        [ForeignKey("convertationId")]
+        [ForeignKey("ConvertationId")]
         public virtual Conversation Conversation { get; set; }
 
-        [ForeignKey("userId")]
+        [ForeignKey("UserId")]
         public virtual GenericUser User { get; set; }
  
     }

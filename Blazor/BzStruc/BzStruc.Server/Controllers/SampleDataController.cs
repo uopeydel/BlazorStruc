@@ -7,12 +7,13 @@ using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Claims;
 using System.Threading.Tasks;
 
 namespace BzStruc.Server.Controllers
 {
     [Route("api/[controller]")]
-    public class SampleDataController : Controller
+    public class SampleDataController : BaseController
     {
         private readonly IConversationFacade _conversationFacade;
         public SampleDataController(IConversationFacade conversationFacade)
@@ -40,9 +41,10 @@ namespace BzStruc.Server.Controllers
 
         [AllowAnonymous]
         [HttpGet("test")]
-        public async Task<IActionResult> Test([FromQuery]PagingParameters paging)
+        public async Task<IActionResult> GetConversationPreviewList([FromQuery]PagingParameters paging)
         {
-            var result = await _conversationFacade.GetPaging(paging);
+             
+            var result = await _conversationFacade.GetPaging(IdentityUser,paging);
             return Ok(result);
 
         }

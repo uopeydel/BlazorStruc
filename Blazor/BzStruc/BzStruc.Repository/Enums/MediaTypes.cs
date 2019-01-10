@@ -6,5 +6,10 @@
         MessageFile,
         MessageAudio,
         MessageVideo,
+
+        ProfileMedia,
+        ProfileHeader,
+
+
     }
 }

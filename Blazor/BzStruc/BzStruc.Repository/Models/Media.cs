@@ -29,7 +29,8 @@ namespace BzStruc.Repository.Models
         public DateTime? CreatedAt { get; set; }
         [Column(TypeName = "datetime2")]
         public DateTime? UpdatedAt { get; set; }
-        
+
+        //TODO : https://docs.microsoft.com/en-us/ef/core/modeling/value-conversions
         public virtual MediaTypes MediaType { get; set; }
        
          

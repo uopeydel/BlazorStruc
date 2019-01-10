@@ -14,17 +14,14 @@ namespace BzStruc.Facade.Implement
     {
         private readonly IGenericEFRepository<MsSql1DbContext> _genericEFRepo;
         private readonly IConversationService _conversationService;
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="_msGenericDb">Dont use this in this facade ,use for send to InterfaceOfService</param>
+
         public ConversationFacade(IGenericEFRepository<MsSql1DbContext> genericEFRepo, IConversationService contactService)
         {
             _genericEFRepo = genericEFRepo;
             _conversationService = contactService;
         }
 
-        public async Task<Results<List<ConversationContract>>> GetPaging(PagingParameters paging)
+        public async Task<Results<List<ConversationContract>>> GetPaging(int IdentityUser, PagingParameters paging)
         {
             Expression<Func<Conversation, bool>> predicate = p => true;
             Expression<Func<Conversation, ConversationContract>> selector = s =>
@@ -37,6 +34,8 @@ namespace BzStruc.Facade.Implement
             var response = await _genericEFRepo.GetPagingAsync<Conversation, ConversationContract>(predicate, selector, paging);
             return response;
         }
+
+
     }
 
 

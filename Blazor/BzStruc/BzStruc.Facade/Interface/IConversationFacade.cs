@@ -9,6 +9,6 @@ namespace BzStruc.Facade.Interface
 {
     public interface IConversationFacade
     {
-        Task<Results<List<ConversationContract>>> GetPaging(PagingParameters paging);
+        Task<Results<List<ConversationContract>>> GetPaging(int IdentityUser,PagingParameters paging);
     }
 }

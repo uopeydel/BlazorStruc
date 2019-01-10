@@ -15,19 +15,19 @@ namespace BzStruc.Repository.Models
 
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        public Guid id { get; set; }
+        public Guid Id { get; set; }
 
-        public Guid conversationId { get; set; }
-        public string message { get; set; }
+        public Guid ConversationId { get; set; }
+        public string Payload { get; set; }
 
-        public int fromUserId { get; set; }
-        public int? mediaId { get; set; }
+        public int FromUserId { get; set; }
+        public int? MediaId { get; set; }
 
         public MessageTypes MessageType { get; set; }
 
-        [ForeignKey("conversationId")]
+        [ForeignKey("ConversationId")]
         public virtual Conversation Conversation { get; set; }
-        [ForeignKey("fromUserId")]
+        [ForeignKey("FromUserId")]
         public virtual GenericUser User { get; set; }
 
         [Column(TypeName = "datetime2")]
@@ -36,7 +36,7 @@ namespace BzStruc.Repository.Models
 
         public virtual ICollection<MessageReadBy> MessageReadBy { get; set; }
 
-        [ForeignKey("mediaId")]
+        [ForeignKey("MediaId")]
         public virtual Media Media { get; set; }
 
     }

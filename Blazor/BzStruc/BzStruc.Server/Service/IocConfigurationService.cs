@@ -3,6 +3,7 @@ using BzStruc.Facade.Interface;
 using BzStruc.Repository.DAL;
 using BzStruc.Repository.Service.Implement;
 using BzStruc.Repository.Service.Interface;
+using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace BzStruc.Server.Service
@@ -28,7 +29,7 @@ namespace BzStruc.Server.Service
 
             #region Singleton
 
-            //services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();  
+            services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
 
             //services.AddSingleton<UrlRedirectRule>();
 

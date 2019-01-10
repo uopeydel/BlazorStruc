@@ -19,6 +19,7 @@ namespace BzStruc.Repository.Models
         public int Id { get; set; }
         public string Name { get; set; }
         public bool IsGroup { get; set; }
+        public bool IsDelete { get; set; }
 
         [Column(TypeName = "datetime2")]
         public DateTime CreatedAt { get; set; }
