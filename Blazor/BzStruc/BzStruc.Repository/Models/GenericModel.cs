@@ -23,6 +23,7 @@ namespace BzStruc.Repository.Models
         [StringLength(200)]
         public string LastName { get; set; }
 
+        public string RefreshToken { get; set; }
         public UserOnlineStatus OnlineStatus { get; set; }
 
         public virtual ICollection<Participants> Participants { get; set; }

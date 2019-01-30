@@ -27,12 +27,14 @@ namespace BzStruc.Repository.DAL
         {
             var query = _msGenericDb.Set<TbSource>().Where(predicate).Select(selector);
             var results = await LinqExtensions.PagingResultProjectionAsync<IQueryable<TbDest>, TbDest>(query, paging);
-            var result = await results.results.ToListAsync();
-            var response = LinqExtensions.CreateSuccessResponse(result, results.pageInfo);
+            var result = await results.Data.ToListAsync();
+            var response = LinqExtensions.CreateSuccessResponse(result, results.PageInfo);
             return response;
         }
 
-        public async Task<CustomTable> FirstOrDefaultAsync<CustomTable>(Expression<Func<CustomTable, bool>> predicate, bool AsNoTracking = false)
+        public async Task<CustomTable> FirstOrDefaultAsync<CustomTable>(
+            Expression<Func<CustomTable, bool>> predicate,
+            bool AsNoTracking = false)
             where CustomTable : class
         {
             var query = _msGenericDb.Set<CustomTable>().Where(predicate);
@@ -41,6 +43,25 @@ namespace BzStruc.Repository.DAL
                 query = query.AsNoTracking();
             }
             return await query.FirstOrDefaultAsync();
+        }
+
+        public async Task<TSelector> FirstOrDefaultAsync<CustomTable, TSelector>(
+            Expression<Func<CustomTable, bool>> predicate,
+            Expression<Func<CustomTable, TSelector>> selector,
+            bool AsNoTracking = false)
+           where CustomTable : class where TSelector : class
+        {
+            var query = _msGenericDb.Set<CustomTable>().Where(predicate).Select(selector);
+            if (AsNoTracking)
+            {
+                query = query.AsNoTracking();
+            }
+            return await query.FirstOrDefaultAsync();
+        }
+
+        public IQueryable<CustomTable> GetQueryAble<CustomTable>() where CustomTable : class
+        {
+            return _msGenericDb.Set<CustomTable>();
         }
 
         public async Task<CustomTable> AddAsync<CustomTable>(CustomTable entity)
@@ -95,7 +116,33 @@ namespace BzStruc.Repository.DAL
                 return;
             }
             _msGenericDb.Entry(entity).State = EntityState.Modified;
+        }
 
+        public async Task<int> SaveAsync()
+        {
+            try
+            {
+                return await _msGenericDb.SaveChangesAsync();
+            }
+            catch (Exception ex)
+            {
+                var tran = _msGenericDb.Database.CurrentTransaction;
+                if (tran != null)
+                {
+                    tran.Rollback();
+                }
+                throw new Exception(GetAllMessages(ex));
+            }
+        }
+
+        private string GetAllMessages(Exception ex, string separator = "\r\nInnerException: ")
+        {
+            if (ex.InnerException == null)
+            {
+                return ex.Message;
+            }
+
+            return ex.Message + separator + GetAllMessages(ex.InnerException, separator);
         }
 
     }
@@ -112,8 +159,16 @@ namespace BzStruc.Repository.DAL
             Expression<Func<CustomTable, bool>> predicate, bool AsNoTracking = false)
             where CustomTable : class;
 
+        Task<TSelector> FirstOrDefaultAsync<CustomTable, TSelector>(
+            Expression<Func<CustomTable, bool>> predicate,
+            Expression<Func<CustomTable, TSelector>> selector,
+            bool AsNoTracking = false)
+           where CustomTable : class where TSelector : class;
+
+        IQueryable<CustomTable> GetQueryAble<CustomTable>() where CustomTable : class;
+
         Task<CustomTable> AddAsync<CustomTable>(CustomTable entity)
-            where CustomTable : class;
+             where CustomTable : class;
 
         Task<IEnumerable<CustomTable>> AddRangeAsync<CustomTable>(IEnumerable<CustomTable> entity)
             where CustomTable : class;
@@ -127,32 +182,34 @@ namespace BzStruc.Repository.DAL
 
         void UpdateSpecficPropertyMultiType<CustomTable>(CustomTable entity, params Expression<Func<CustomTable, object>>[] properties)
              where CustomTable : class;
+
+        Task<int> SaveAsync();
     }
 
 
 
     public class Results<DTO>
     {
-        public DTO results { get; set; }
-        public List<string> errors { get; set; }
-        public PagingInfo pageInfo { get; set; }
+        public DTO Data { get; set; }
+        public List<string> Errors { get; set; }
+        public PagingInfo PageInfo { get; set; }
     }
 
     public class PagingParameters
     {
-        public string orderBy { get; set; } = "id";
-        public bool asc { get; set; } = true;
-        public int page { get; set; } = 1;
-        public int pageSize { get; set; } = 20;
-        public int top { get; set; } = 0;
+        public string OrderBy { get; set; } = "Id";
+        public bool Asc { get; set; } = true;
+        public int Page { get; set; } = 1;
+        public int PageSize { get; set; } = 20;
+        public int Top { get; set; } = 0;
     }
 
     public class PagingInfo
     {
-        public int total { get; set; }
-        public int totalPages { get; set; }
-        public int pageSize { get; set; }
-        public int currentPage { get; set; }
+        public int Total { get; set; }
+        public int TotalPages { get; set; }
+        public int PageSize { get; set; }
+        public int CurrentPage { get; set; }
     }
     public static class LinqExtensions
     {
@@ -194,40 +251,40 @@ namespace BzStruc.Repository.DAL
         {
             try
             {
-                query = LinqExtensions.OrderBy(query, paging.asc, paging.orderBy);
-                paging.top = (paging.top < 0 || paging.top > 5) ? 5 : paging.top;
+                query = LinqExtensions.OrderBy(query, paging.Asc, paging.OrderBy);
+                paging.Top = (paging.Top < 0 || paging.Top > 5) ? 5 : paging.Top;
                 int total = 0;
-                if (paging.top != 0)
+                if (paging.Top != 0)
                 {
-                    paging.pageSize = paging.top;
-                    paging.page = 1;
-                    total = paging.top;
+                    paging.PageSize = paging.Top;
+                    paging.Page = 1;
+                    total = paging.Top;
                     query = query
-                        .Take(paging.top);
+                        .Take(paging.Top);
                 }
                 else if (noLimit == false)
                 {
-                    paging.pageSize = (paging.pageSize > 51 || paging.pageSize < 1) ? 20 : paging.pageSize;
-                    paging.page = (paging.page < 1) ? 1 : paging.page;
+                    paging.PageSize = (paging.PageSize > 51 || paging.PageSize < 1) ? 20 : paging.PageSize;
+                    paging.Page = (paging.Page < 1) ? 1 : paging.Page;
                     total = await query.CountAsync();
                     query = query
-                        .Skip(paging.pageSize * (paging.page - 1))
-                        .Take(paging.pageSize);
+                        .Skip(paging.PageSize * (paging.Page - 1))
+                        .Take(paging.PageSize);
                 }
                 else
                 {
                     total = await query.CountAsync();
-                    paging.pageSize = total;
-                    paging.page = 1;
+                    paging.PageSize = total;
+                    paging.Page = 1;
                 }
 
-                var totalPages = paging.pageSize > 0 ? (int)Math.Ceiling((double)total / paging.pageSize) : 0;
+                var totalPages = paging.PageSize > 0 ? (int)Math.Ceiling((double)total / paging.PageSize) : 0;
                 var pageInfo = new PagingInfo
                 {
-                    total = total,
-                    totalPages = totalPages,
-                    currentPage = paging.page,
-                    pageSize = paging.pageSize
+                    Total = total,
+                    TotalPages = totalPages,
+                    CurrentPage = paging.Page,
+                    PageSize = paging.PageSize
                 };
 
                 return CreateSuccessResponse<IQueryable<O>>(query, pageInfo);
@@ -235,7 +292,7 @@ namespace BzStruc.Repository.DAL
             catch (Exception ex)
             {
                 var result = new Results<List<DTO>>();
-                result.errors = new List<string> { ex.Message, ex.InnerException?.Message, ex.InnerException?.InnerException?.Message };
+                result.Errors = new List<string> { ex.Message, ex.InnerException?.Message, ex.InnerException?.InnerException?.Message };
                 return CreateErrorResponse<IQueryable<O>>("error while get paging", ex);
             }
 
@@ -245,16 +302,16 @@ namespace BzStruc.Repository.DAL
         public static Results<TResult> CreateSuccessResponse<TResult>(TResult tresult, PagingInfo pagingInfo)
         {
             var result = new Results<TResult>();
-            result.results = tresult;
-            result.pageInfo = pagingInfo;
+            result.Data = tresult;
+            result.PageInfo = pagingInfo;
             return result;
         }
 
         public static Results<TResult> CreateErrorResponse<TResult>(string error, Exception exception = null)
         {
             var result = new Results<TResult>();
-            result.errors = GetInnerExceptionMessage(exception);
-            result.errors.Insert(0, error);
+            result.Errors = GetInnerExceptionMessage(exception);
+            result.Errors.Insert(0, error);
             return result;
         }
 
