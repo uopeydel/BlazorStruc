@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.IdentityModel.Tokens;
 using System.Linq;
 using System.Threading.Tasks;
+//using Microsoft.AspNetCore.Mvc.Filters;
 
 namespace BzStruc.Server.Controllers
 {
@@ -57,6 +58,8 @@ namespace BzStruc.Server.Controllers
             });
         }
 
+        //https://docs.microsoft.com/en-us/aspnet/core/mvc/controllers/filters?view=aspnetcore-2.2
+        //[EnableThrottling(PerDay = 10, PerMinute = 1, PerHour = 5)]
         [HttpPost]
         public async Task CreateAccount([FromBody]GenericUserContract newAccount)
         {

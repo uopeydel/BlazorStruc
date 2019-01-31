@@ -11,7 +11,6 @@ namespace BzStruc.Repository.Models
         {
             Participants = new HashSet<Participants>();
             Messages = new HashSet<Messages>();
-           
         }
 
         [Key]
@@ -33,7 +32,7 @@ namespace BzStruc.Repository.Models
         public virtual ICollection<Participants> Participants { get; set; }
 
         public virtual ICollection<Messages> Messages { get; set; }
-         
+
     }
 
 

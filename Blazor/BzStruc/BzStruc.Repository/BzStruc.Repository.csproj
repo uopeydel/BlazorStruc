@@ -8,8 +8,4 @@
     <ProjectReference Include="..\BzStruc.Shared\BzStruc.Shared.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Migrations\" />
-  </ItemGroup>
-
 </Project>

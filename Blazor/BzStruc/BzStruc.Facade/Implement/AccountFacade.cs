@@ -3,6 +3,7 @@ using BzStruc.Repository.Contract;
 using BzStruc.Repository.DAL;
 using BzStruc.Repository.Models;
 using BzStruc.Repository.Service.Interface;
+using Microsoft.AspNetCore.Identity;
 using System;
 using System.Collections.Generic;
 using System.Linq.Expressions;
@@ -14,16 +15,24 @@ namespace BzStruc.Facade.Implement
     {
         private readonly IGenericEFRepository<MsSql1DbContext> _genericEFRepo;
         private readonly IAccountService _accountService;
-
+        private readonly UserManager<GenericUser> _userManager;
         public AccountFacade(IGenericEFRepository<MsSql1DbContext> genericEFRepo, IAccountService accountService)
         {
             _genericEFRepo = genericEFRepo;
             _accountService = accountService;
         }
 
-        public Task CreateAccount(GenericUserContract newAccount)
+        public async Task CreateAccount(GenericUserContract account)
         {
-            _genericEFRepo.AddAsync<>
+            var newAccount = new GenericUser
+            {
+                Email = account.Email,
+                FirstName = account.FirstName,
+                LastName = account.LastName,
+                UserName = account.Email,
+
+            };
+            var result = await _userManager.CreateAsync(newAccount, account.Password);
         }
 
         public async Task<Results<List<GenericUserContract>>> GetPaging(int IdentityUser, PagingParameters paging)

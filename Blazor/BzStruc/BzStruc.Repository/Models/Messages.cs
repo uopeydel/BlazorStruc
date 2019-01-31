@@ -15,9 +15,9 @@ namespace BzStruc.Repository.Models
 
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        public Guid Id { get; set; }
+        public int Id { get; set; }
 
-        public Guid ConversationId { get; set; }
+        public int ConversationId { get; set; }
         public string Payload { get; set; }
 
         public int FromUserId { get; set; }

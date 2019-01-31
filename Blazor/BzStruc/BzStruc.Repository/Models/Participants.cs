@@ -11,7 +11,7 @@ namespace BzStruc.Repository.Models
         [Key]
         [Column(Order = 0)]
         [DatabaseGenerated(DatabaseGeneratedOption.None)]
-        public Guid ConvertationId { get; set; }
+        public int ConvertationId { get; set; }
 
         [Key]
         [Column(Order = 1)]

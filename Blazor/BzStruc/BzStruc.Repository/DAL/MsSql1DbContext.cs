@@ -11,6 +11,7 @@ using System;
 
 namespace BzStruc.Repository.DAL
 {
+    // Change your target project to the migrations project by using the drop-down list to BzStruc.Repository
     // Add-Migration CreateMigrationDatabaseMsSql1 -Context MsSql1DbContext
     // Update-Database CreateMigrationDatabaseMsSql1 -Context MsSql1DbContext
     // # NOTE
@@ -74,9 +75,9 @@ namespace BzStruc.Repository.DAL
                v => (UserOnlineStatus)Enum.Parse(typeof(UserOnlineStatus), v));
 
             builder
-              .Entity<GenericUser>()
-              .Property(e => e.OnlineStatus)
-              .HasConversion(UserOnlineStatusConverter);
+                 .Entity<GenericUser>()
+                 .Property(e => e.OnlineStatus)
+                 .HasConversion(UserOnlineStatusConverter);
 
             //
             var MessageTypesConverter = new ValueConverter<MessageTypes, string>(
@@ -84,9 +85,41 @@ namespace BzStruc.Repository.DAL
               v => (MessageTypes)Enum.Parse(typeof(MessageTypes), v));
 
             builder
-              .Entity<Messages>()
-              .Property(e => e.MessageType)
-              .HasConversion(MessageTypesConverter);
+                 .Entity<Messages>()
+                 .Property(e => e.MessageType)
+                 .HasConversion(MessageTypesConverter);
+
+            builder.Entity<MessageReadBy>()
+                .HasKey(c => new { c.MessageId, c.UserId });
+
+            builder.Entity<GenericUser>()
+                .HasMany(e => e.MessageReadBy)
+                .WithOne(e => e.User)
+                .HasForeignKey(e => e.UserId)
+                .OnDelete(DeleteBehavior.ClientSetNull);
+
+            builder.Entity<Messages>()
+                .HasMany(e => e.MessageReadBy)
+                .WithOne(e => e.Messages)
+                .HasForeignKey(e => e.MessageId)
+                .OnDelete(DeleteBehavior.ClientSetNull);
+
+
+            
+            builder.Entity<Participants>()
+                .HasKey(c => new { c.ConvertationId, c.UserId });
+
+            builder.Entity<GenericUser>()
+                .HasMany(e => e.Participants)
+                .WithOne(e => e.User)
+                .HasForeignKey(e => e.UserId)
+                .OnDelete(DeleteBehavior.ClientSetNull);
+
+            builder.Entity<Conversation>()
+                .HasMany(e => e.Participants)
+                .WithOne(e => e.Conversation)
+                .HasForeignKey(e => e.ConvertationId)
+                .OnDelete(DeleteBehavior.ClientSetNull);
 
         }
 

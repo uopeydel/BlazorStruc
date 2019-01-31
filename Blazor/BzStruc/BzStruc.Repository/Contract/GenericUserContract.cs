@@ -16,6 +16,8 @@ namespace BzStruc.Repository.Contract
         [DataMember]
         public string LastName { get; set; }
         [DataMember]
+        public string Password { get; set; }
+        [DataMember]
         public UserOnlineStatus OnlineStatus { get; set; }
         [DataMember]
         public string Email { get; set; }

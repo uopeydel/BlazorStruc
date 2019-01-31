@@ -24,6 +24,9 @@ namespace BzStruc.Server.Service
             services.AddScoped(typeof(IGenericEFRepository<>), typeof(GenericEFRepository<>));
             services.AddScoped<IConversationService, ConversationService>();
             services.AddScoped<IConversationFacade, ConversationFacade>();
+
+            services.AddScoped<IAccountService, AccountService>();
+            services.AddScoped<IAccountFacade, AccountFacade>();
             #endregion
 
 
