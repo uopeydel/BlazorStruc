@@ -1,7 +1,4 @@
 ﻿using BzStruc.Repository.Enums;
-using BzStruc.Repository.Models;
-using System;
-using System.Collections.Generic;
 using System.Runtime.Serialization;
 
 namespace BzStruc.Repository.Contract
@@ -15,7 +12,7 @@ namespace BzStruc.Repository.Contract
         public string FirstName { get; set; }
         [DataMember]
         public string LastName { get; set; }
-        [DataMember]
+
         public string Password { get; set; }
         [DataMember]
         public UserOnlineStatus OnlineStatus { get; set; }

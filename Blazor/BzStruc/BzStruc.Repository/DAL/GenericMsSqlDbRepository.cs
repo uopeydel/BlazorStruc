@@ -299,7 +299,7 @@ namespace BzStruc.Repository.DAL
 
         }
 
-        public static Results<TResult> CreateSuccessResponse<TResult>(TResult tresult, PagingInfo pagingInfo)
+        public static Results<TResult> CreateSuccessResponse<TResult>(TResult tresult, PagingInfo pagingInfo = null)
         {
             var result = new Results<TResult>();
             result.Data = tresult;
