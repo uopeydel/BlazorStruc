@@ -1,4 +1,5 @@
-﻿using BzStruc.Repository.Enums;
+﻿ 
+using BzStruc.Shared.Enums;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;

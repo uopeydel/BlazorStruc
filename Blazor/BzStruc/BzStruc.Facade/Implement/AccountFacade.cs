@@ -1,8 +1,10 @@
 ﻿using BzStruc.Facade.Interface;
-using BzStruc.Repository.Contract;
+
 using BzStruc.Repository.DAL;
 using BzStruc.Repository.Models;
+using BzStruc.Repository.Query;
 using BzStruc.Repository.Service.Interface;
+using BzStruc.Shared.Contract;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using System;
@@ -18,11 +20,11 @@ namespace BzStruc.Facade.Implement
         private readonly IGenericEFRepository<MsSql1DbContext> _genericEFRepo;
         private readonly IAccountService _accountService;
         private readonly UserManager<GenericUser> _userManager;
-        private readonly SignInManager<IdentityUser> _signInManager;
+        private readonly SignInManager<GenericUser> _signInManager;
         public AccountFacade(
             IGenericEFRepository<MsSql1DbContext> genericEFRepo,
             IAccountService accountService,
-            SignInManager<IdentityUser> signInManager,
+            SignInManager<GenericUser> signInManager,
             UserManager<GenericUser> userManager
             )
         {
@@ -47,21 +49,22 @@ namespace BzStruc.Facade.Implement
 
         public async Task<GenericUserContract> GetMyAccount(int IdentityUser)
         {
-            Expression<Func<GenericUser, bool>> predicate = p => p.Id == IdentityUser;
-            Expression<Func<GenericUser, GenericUserContract>> selector = s =>
-            new GenericUserContract
-            {
-                Id = s.Id,
-                Email = s.Email,
-                FirstName = s.FirstName,
-                LastName = s.LastName,
-                OnlineStatus = s.OnlineStatus
-            };
-            var response = await _genericEFRepo.GetQueryAble<GenericUser>()
-                .Where(predicate)
-                .Select(selector)
-                .FirstOrDefaultAsync();
-            return response;
+            return await GenericUserQuery.GetById(_genericEFRepo ,IdentityUser);
+            //Expression<Func<GenericUser, bool>> predicate = p => p.Id == IdentityUser;
+            //Expression<Func<GenericUser, GenericUserContract>> selector = s =>
+            //new GenericUserContract
+            //{
+            //    Id = s.Id,
+            //    Email = s.Email,
+            //    FirstName = s.FirstName,
+            //    LastName = s.LastName,
+            //    OnlineStatus = s.OnlineStatus
+            //};
+            //var response = await _genericEFRepo.GetQueryAble<GenericUser>()
+            //    .Where(predicate)
+            //    .Select(selector)
+            //    .FirstOrDefaultAsync();
+            //return response;
         }
 
         public async Task<Results<List<GenericUserContract>>> GetPaging(int IdentityUser, PagingParameters paging)
@@ -88,7 +91,7 @@ namespace BzStruc.Facade.Implement
             return result;
         }
 
-        public async Task<GenericUser> SignIn(GenericUserContract account)
+        public async Task<GenericUser> SignIn(GenericUserSignInContract account)
         {
             var signInResult = await _signInManager.PasswordSignInAsync(account.Email, account.Password, false, false);
             if (signInResult.Succeeded)

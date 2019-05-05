@@ -1,6 +1,7 @@
-﻿using BzStruc.Repository.Contract;
+﻿
 using BzStruc.Repository.DAL;
 using BzStruc.Repository.Models;
+using BzStruc.Shared.Contract;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -14,7 +15,7 @@ namespace BzStruc.Facade.Interface
         Task<string> GetRefreshToken(string email);
         Task UpdateRefreshToken(string username, string newRefreshToken);
         Task<Results<bool>> CreateAccount(GenericUserContract newAccount);
-        Task<GenericUser> SignIn(GenericUserContract account);
+        Task<GenericUser> SignIn(GenericUserSignInContract account);
         Task<GenericUserContract> GetMyAccount(int identityUser);
     }
 }

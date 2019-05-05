@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 namespace BzStruc.Repository.Service.Interface
 {
     public interface IAccountService
-    { 
+    {
+        void SetValueAccount();
     }
 }

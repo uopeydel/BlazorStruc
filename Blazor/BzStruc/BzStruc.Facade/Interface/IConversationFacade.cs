@@ -1,5 +1,6 @@
-﻿using BzStruc.Repository.Contract;
+﻿
 using BzStruc.Repository.DAL;
+using BzStruc.Shared.Contract;
 using System;
 using System.Collections.Generic;
 using System.Text;

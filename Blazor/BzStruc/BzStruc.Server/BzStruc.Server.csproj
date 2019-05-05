@@ -7,7 +7,6 @@
 
   <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.App" />
-    <PackageReference Include="Microsoft.AspNetCore.Blazor.Server" Version="0.7.0" />
   </ItemGroup>
 
   <ItemGroup>

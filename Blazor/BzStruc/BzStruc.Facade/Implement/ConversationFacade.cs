@@ -1,8 +1,9 @@
 ﻿using BzStruc.Facade.Interface;
-using BzStruc.Repository.Contract;
+
 using BzStruc.Repository.DAL;
 using BzStruc.Repository.Models;
 using BzStruc.Repository.Service.Interface;
+using BzStruc.Shared.Contract;
 using System;
 using System.Collections.Generic;
 using System.Linq.Expressions;

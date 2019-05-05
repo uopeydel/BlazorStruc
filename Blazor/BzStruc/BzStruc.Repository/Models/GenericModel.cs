@@ -1,4 +1,5 @@
-﻿using BzStruc.Repository.Enums;
+﻿
+using BzStruc.Shared.Enums;
 using Microsoft.AspNetCore.Identity;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
@@ -6,7 +7,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace BzStruc.Repository.Models
 {
-   
+
 
     public partial class GenericUser : IdentityUser<int>
     {
@@ -15,6 +16,8 @@ namespace BzStruc.Repository.Models
             Participants = new HashSet<Participants>();
             Messages = new HashSet<Messages>();
             MessageReadBy = new HashSet<MessageReadBy>();
+
+            Character = new HashSet<Character>();
         }
         [Required]
         [StringLength(200)]
@@ -29,6 +32,8 @@ namespace BzStruc.Repository.Models
         public virtual ICollection<Participants> Participants { get; set; }
         public virtual ICollection<Messages> Messages { get; set; }
         public virtual ICollection<MessageReadBy> MessageReadBy { get; set; }
+
+        public virtual ICollection<Character> Character { get; set; }
 
     }
 

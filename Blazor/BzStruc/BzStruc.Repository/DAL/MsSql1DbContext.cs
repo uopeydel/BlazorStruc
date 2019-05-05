@@ -1,5 +1,6 @@
-﻿using BzStruc.Repository.Enums;
+﻿ 
 using BzStruc.Repository.Models;
+using BzStruc.Shared.Enums;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.SqlServer.Infrastructure.Internal;
@@ -49,8 +50,8 @@ namespace BzStruc.Repository.DAL
         public virtual DbSet<MessageReadBy> MessageReadBy { get; set; }
         public virtual DbSet<Messages> Message { get; set; }
         public virtual DbSet<Participants> Participant { get; set; }
-
-
+        public virtual DbSet<Character> Character { get; set; }
+        
 
 
         public virtual DbSet<Logs> Logs { get; set; }

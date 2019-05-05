@@ -10,9 +10,14 @@ using System.Threading.Tasks;
 namespace BzStruc.Repository.Service.Implement
 {
     public class AccountService : IAccountService
-    {
-
-
-       
+    { 
+        public void SetValueAccount()
+        {
+              
+        }
     }
+
+
+      
+
 }

@@ -1,0 +1,45 @@
+﻿@page "/account/login"
+@inject HttpClient Http
+@using BzStruc.Shared.Contract
+@using Web.Client.TokenService;
+
+<h1>Login</h1>
+
+@if (false)
+{
+    <p><em>Loading...</em></p>
+}
+else
+{
+    <button onclick=@(async () => await Login())>Do Login s</button>
+}
+
+@functions {
+
+
+    protected override async Task OnInitAsync()
+    {
+
+    }
+
+    private async Task Login()
+    {
+        Results<RefreshTokenContract> result =
+            await Http.PostJsonAsync<Results<RefreshTokenContract>>
+            ("https://localhost:44381/api/account/token", new GenericUserSignInContract
+            {
+                Email = "lapadol@msn.com",
+                Password = "123456!Ll"
+            });
+
+        Http.AddHeader(result.Data.Token);
+        Results<GenericUserContract> resultMe =
+           await Http.GetJsonAsync<Results<GenericUserContract>>
+           ("https://localhost:44381/api/account/me");
+
+
+    }
+
+
+
+}

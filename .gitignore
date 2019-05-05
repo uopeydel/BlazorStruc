@@ -26,3 +26,11 @@ Blazor/BzStruc/BzStruc\.Repository/obj/
 Blazor/BzStruc/BzStruc\.Shared/bin/
 
 Blazor/BzStruc/BzStruc\.Client/bin/
+
+Blazor/BzStruc/Web\.Server/bin/
+
+Blazor/BzStruc/Web\.Server/obj/
+
+Blazor/BzStruc/Web\.Client/bin/
+
+Blazor/BzStruc/Web\.Client/obj/

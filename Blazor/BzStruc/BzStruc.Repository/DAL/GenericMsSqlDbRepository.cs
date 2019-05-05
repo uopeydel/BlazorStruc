@@ -1,4 +1,5 @@
 ﻿using BzStruc.Repository.Models;
+using BzStruc.Shared.Contract;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using System;
@@ -188,29 +189,29 @@ namespace BzStruc.Repository.DAL
 
 
 
-    public class Results<DTO>
-    {
-        public DTO Data { get; set; }
-        public List<string> Errors { get; set; }
-        public PagingInfo PageInfo { get; set; }
-    }
+    //public class Results<DTO>
+    //{
+    //    public DTO Data { get; set; }
+    //    public List<string> Errors { get; set; }
+    //    public PagingInfo PageInfo { get; set; }
+    //}
 
-    public class PagingParameters
-    {
-        public string OrderBy { get; set; } = "Id";
-        public bool Asc { get; set; } = true;
-        public int Page { get; set; } = 1;
-        public int PageSize { get; set; } = 20;
-        public int Top { get; set; } = 0;
-    }
+    //public class PagingParameters
+    //{
+    //    public string OrderBy { get; set; } = "Id";
+    //    public bool Asc { get; set; } = true;
+    //    public int Page { get; set; } = 1;
+    //    public int PageSize { get; set; } = 20;
+    //    public int Top { get; set; } = 0;
+    //}
 
-    public class PagingInfo
-    {
-        public int Total { get; set; }
-        public int TotalPages { get; set; }
-        public int PageSize { get; set; }
-        public int CurrentPage { get; set; }
-    }
+    //public class PagingInfo
+    //{
+    //    public int Total { get; set; }
+    //    public int TotalPages { get; set; }
+    //    public int PageSize { get; set; }
+    //    public int CurrentPage { get; set; }
+    //}
     public static class LinqExtensions
     {
         public static IQueryable<T> OrderBy<T>(this IQueryable<T> source,
@@ -319,7 +320,7 @@ namespace BzStruc.Repository.DAL
         {
             var errorTextList = new List<string>();
             var error = GetSubInnerExceptionMessage(exception);
-            while (string.IsNullOrEmpty(error.Trim()))
+            while (!string.IsNullOrEmpty(error?.Trim()))
             {
                 errorTextList.Add(error);
                 error = GetSubInnerExceptionMessage(exception);
@@ -329,7 +330,7 @@ namespace BzStruc.Repository.DAL
 
         private static string GetSubInnerExceptionMessage(Exception exception)
         {
-            return exception.InnerException?.Message;
+            return exception?.InnerException?.Message;
         }
 
     }
