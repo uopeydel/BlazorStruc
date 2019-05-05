@@ -32,40 +32,40 @@ namespace Web.Server.UseGraphQL
         }
     }
      
-    ///  
-    public class PageInfoType : ObjectGraphType<PageInfo<GenericUser>>
-    {
-        public PageInfoType()
-        {
-            Field<ListGraphType<GenericUserQl>>(
-                  "GenericUserPaging",
-                  resolve: context => context.Source.DataList
-              );
-            Field(xx => xx.Chars);
-            Field(xx => xx.PageCount);
-            Field(xx => xx.Size);
-            Field(xx => xx.TotalCount);
-            Field(xx => xx.DataList);
-        }
-    }
+    /////  
+    //public class PageInfoType : ObjectGraphType<PageInfo<GenericUser>>
+    //{
+    //    public PageInfoType()
+    //    {
+    //        Field<ListGraphType<GenericUserQl>>(
+    //              "GenericUserPaging",
+    //              resolve: context => context.Source.DataList
+    //          );
+    //        Field(x => x.Chars);
+    //        Field(x => x.PageCount);
+    //        Field(x => x.Size);
+    //        Field(x => x.TotalCount);
+    //        Field(x => x.DataList);
+    //    }
+    //}
 
-    public class PageInfo<T>
-    {
-        public int TotalCount { get; private set; }
-        public int Size { get; private set; }
-        public int PageCount { get; private set; }
-        public IEnumerable<T> DataList { get; private set; }
-        public IEnumerable<string> Chars { get; set; }
-        //private IEnumerable<T> OriginalList { get; set; }
-        public PageInfo(IEnumerable<T> list, int page, int size)
-        {
-            //OriginalList = list;//for a-z filters
-            DataList = list.Skip((page - 1) * size).Take(size);
-            TotalCount = list.Count();
-            PageCount = Convert.ToInt32(Math.Ceiling(TotalCount / Convert.ToDouble(size)));
-            Size = size;
-        }
-    }
+    //public class PageInfo<T>
+    //{
+    //    public int TotalCount { get; private set; }
+    //    public int Size { get; private set; }
+    //    public int PageCount { get; private set; }
+    //    public IEnumerable<T> DataList { get; private set; }
+    //    public IEnumerable<string> Chars { get; set; }
+    //    //private IEnumerable<T> OriginalList { get; set; }
+    //    public PageInfo(IEnumerable<T> list, int page, int size)
+    //    {
+    //        //OriginalList = list;//for a-z filters
+    //        DataList = list.Skip((page - 1) * size).Take(size);
+    //        TotalCount = list.Count();
+    //        PageCount = Convert.ToInt32(Math.Ceiling(TotalCount / Convert.ToDouble(size)));
+    //        Size = size;
+    //    }
+    //}
 
 
 }

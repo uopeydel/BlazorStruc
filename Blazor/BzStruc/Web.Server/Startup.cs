@@ -29,7 +29,7 @@ namespace Web.Server
     {
         private readonly IHostingEnvironment _env;
         public IConfiguration Configuration { get; }
-       
+
         readonly string MyAllowSpecificOrigins = "_myAllowSpecificOrigins";
 
         public Startup(IConfiguration configuration, IHostingEnvironment env)
@@ -43,10 +43,9 @@ namespace Web.Server
         {
             services.AddDbContext<MsSql1DbContext>(options =>
             {
-                options.UseSqlServer(Configuration.GetConnectionString("MsSql1DbConnection"));
-                //options.UseInMemoryDatabase("OktaGraphQL");
-            } );
-            
+                options.UseSqlServer(Configuration.GetConnectionString("MsSql1DbConnectionx"));
+            });
+
 
             services.AddIdentity<GenericUser, GenericRole>()
                 .AddEntityFrameworkStores<MsSql1DbContext>()

@@ -63,6 +63,38 @@ namespace Web.Server.Controllers
             }
             return Ok(result);
         }
+
+         
+        [HttpPost]
+        [Route("paging")]
+        public async Task<IActionResult> Character([FromBody] GraphQLQuery query)
+        {
+            var inputs = query.Variables.ToInputs();
+
+            var schema = new Schema
+            {
+                Query = new TestPagingQuery(_db),
+
+            };
+
+            var result = await new DocumentExecuter().ExecuteAsync(_ =>
+            {
+                _.Schema = schema;
+                _.Query = query.Query;
+                _.OperationName = query.OperationName;
+                _.Inputs = inputs;
+            });
+
+            if (result.Errors?.Count > 0)
+            {
+                return Ok(result.Errors);
+            }
+
+            return Ok(result);
+        }
+
+
+
         #region Legacy
 
         //[HttpPost]

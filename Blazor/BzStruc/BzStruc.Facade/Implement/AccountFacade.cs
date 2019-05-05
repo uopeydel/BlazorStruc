@@ -49,7 +49,7 @@ namespace BzStruc.Facade.Implement
 
         public async Task<GenericUserContract> GetMyAccount(int IdentityUser)
         {
-            return await GenericUserQuery.GetById(_genericEFRepo ,IdentityUser);
+            return await GenericUserQuery.GetById(_genericEFRepo, IdentityUser);
             //Expression<Func<GenericUser, bool>> predicate = p => p.Id == IdentityUser;
             //Expression<Func<GenericUser, GenericUserContract>> selector = s =>
             //new GenericUserContract

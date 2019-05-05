@@ -33,6 +33,10 @@ namespace Web.Server.UseGraphQL
                   return character;
               });
         }
+
+
     }
+
+
 
 }
